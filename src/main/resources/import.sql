@@ -1,4 +1,4 @@
-INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Margherita', 'Tomato sauce, mozzarella, and oregano', 700, '', '2023-11-09 11:35:00');
-INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Pepperoni', 'Tomato sauce, mozzarella, and pepperoni', 800, '', '2023-11-09 11:35:30');
-INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Hawaiian', 'Tomato sauce, mozzarella, and pineapple', 900, '', '2023-11-09 11:36:00');
-INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Meat Lovers', 'Tomato sauce, mozzarella, and meat', 950, '', '2023-11-09 11:36:30');
+INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Margherita', 'Tomato sauce, mozzarella, and oregano', 700, 'https://images.newyorkpizza.nl/Products/Original/Margherita-8046.png', '2023-11-09 11:35:00');
+INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Pepperoni', 'Tomato sauce, mozzarella, and pepperoni', 800, 'https://images.newyorkpizza.nl/Products/Original/double_Pepperoni-8056.png', '2023-11-09 11:35:30');
+INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Hawaiian', 'Tomato sauce, mozzarella, and pineapple', 900, 'https://images.newyorkpizza.nl/Products/Original/Hawaii-8059.png', '2023-11-09 11:36:00');
+INSERT INTO pizzas (name, description, price_in_cents, image_url, created_at) VALUES ('Meat Lovers', 'Tomato sauce, mozzarella, and meat', 950, 'https://images.newyorkpizza.nl/Products/Original/BBQ_meatlovers-8053.png', '2023-11-09 11:36:30');
