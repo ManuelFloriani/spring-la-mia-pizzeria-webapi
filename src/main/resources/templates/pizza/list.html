@@ -4,6 +4,19 @@
 <body>
 <nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
 <div class="container">
+    <form th:action="@{/pizzas}" method="GET">
+        <div class="input-group my-2">
+            <input
+                    name="search"
+                    type="text"
+                    placeholder="Search by name"
+                    class="form-control"
+                    th:value="${param.search}"
+            >
+            <button class="btn btn-primary" type="submit">Search</button>
+
+        </div>
+    </form>
     <div class="row">
         <div class="col-6">
             <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="card m-3">
@@ -11,6 +24,9 @@
                 <h3 th:text="*{name}"></h3>
                 <p th:text="*{description}"></p>
                 <strong th:text="*{priceInCents}"></strong>
+                <h2>
+                    <a th:href="@{/pizzas/show/{id}(id=*{id})}" title="details"><i class="fa-solid fa-pizza-slice"></i></a>
+                </h2>
             </div>
         </div>
     </div>

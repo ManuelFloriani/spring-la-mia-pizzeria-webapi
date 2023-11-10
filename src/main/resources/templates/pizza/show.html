@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Pizzeria Vesuvio')"></head>
+<body>
+<nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
+<div class="container" th:object="${pizza}">
+    <div class="card m-3">
+        <img th:src="*{imageUrl}" alt="pizza image">
+        <h3 th:text="*{name}"></h3>
+        <p th:text="*{description}"></p>
+        <strong th:text="*{priceInCents}"></strong>
+        <p>
+            <a th:href="@{/pizzas}" class="btn btn-primary">Back to menu</a>
+        </p>
+    </div>
+</div>
+</body>
