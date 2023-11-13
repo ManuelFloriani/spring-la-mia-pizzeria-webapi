@@ -2,7 +2,7 @@
 <body>
 <nav th:fragment="topNavbar(area)" class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/books}">Pizzeria Vesuvio</a>
+        <a class="navbar-brand" th:href="@{/pizzas}">Pizzeria Vesuvio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                         <a class="nav-link" th:classAppend="${area == 'pizza' ? 'active' : ''}"
-                        th:href="@{/pizza}">Pizzas</a>
+                        th:href="@{/pizzas}">Pizzas</a>
                 </li>
             </ul>
         </div>

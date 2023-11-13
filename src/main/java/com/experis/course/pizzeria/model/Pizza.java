@@ -1,6 +1,10 @@
 package com.experis.course.pizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -10,13 +14,19 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
     @Lob
+    @NotBlank(message = "Description cannot be blank")
+    @Size(min = 3, max = 500, message = "Description must be between 3 and 500 characters")
     private String description;
-
+//    @NotBlank(message = "Price cannot be blank")
+    @Positive(message = "Price must be positive")
     private Integer priceInCents;
-
+    @NotBlank(message = "Image URL cannot be blank")
     private String imageUrl;
+    @CreationTimestamp
     private LocalDateTime createdAt;
     /////////// GETTERS AND SETTERS ///////////
 

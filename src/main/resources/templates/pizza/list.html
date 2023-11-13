@@ -4,8 +4,8 @@
 <body>
 <nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
 <div class="container">
-    <form th:action="@{/pizzas}" method="GET">
-        <div class="input-group my-2">
+    <form class="row" th:action="@{/pizzas}" method="GET">
+        <div class="input-group my-2 col-6">
             <input
                     name="search"
                     type="text"
@@ -15,6 +15,9 @@
             >
             <button class="btn btn-primary" type="submit">Search</button>
 
+        </div>
+        <div class="col-3">
+            <a th:href="@{/pizzas/create}" class="btn btn-primary">Add new pizza</a>
         </div>
     </form>
     <div class="row">

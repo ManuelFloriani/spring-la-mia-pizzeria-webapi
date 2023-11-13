@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Pizzeria Vesuvio')"></head>
+<body>
+<nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
+<div class="container">
+    <h1>Create new pizza</h1>
+    <form id="pizza-create"
+          method="POST"
+          th:action="@{/pizzas/store}"
+          th:object="${pizza}"
+          class="row g-3"
+    >
+    <!--    Name    -->
+        <div class="col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    th:field="*{name}"
+            >
+        </div>
+<!--    Description    -->
+        <div class="col-md-6">
+            <label for="description" class="form-label">Description</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    name="description"
+                    th:field="*{description}"
+            >
+        </div>
+<!--    Price    -->
+        <div class="col-md-6">
+            <label for="priceInCents" class="form-label">Price</label>
+            <input
+                    type="number"
+                    class="form-control"
+                    id="priceInCents"
+                    name="priceInCents"
+                    th:field="*{priceInCents}"
+            >
+        </div>
+        <div class="col-md-6">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="imageUrl"
+                    name="imageUrl"
+                    th:field="*{imageUrl}"
+            >
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
