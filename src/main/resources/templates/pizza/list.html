@@ -29,7 +29,11 @@
                 <strong th:text="*{priceInCents}"></strong>
                 <h2>
                     <a th:href="@{/pizzas/show/{id}(id=*{id})}" title="details"><i class="fa-solid fa-pizza-slice"></i></a>
+                    <a th:href="@{/pizzas/edit/{id}(id=*{id})}" title="edit"><i class="fa-solid fa-pencil"></i></a>
                 </h2>
+                <form th:action="@{/pizzas/delete/{id}(id=*{id})}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>
