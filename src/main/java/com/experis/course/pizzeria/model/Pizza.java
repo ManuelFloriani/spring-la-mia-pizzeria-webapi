@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -28,6 +30,9 @@ public class Pizza {
     private String imageUrl;
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Offer> offers = new ArrayList<>();
     /////////// GETTERS AND SETTERS ///////////
 
     public Integer getId() {

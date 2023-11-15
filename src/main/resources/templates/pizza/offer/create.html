@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Pizzeria Vesuvio')"></head>
+<body>
+<nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
+<div class="container">
+    <h1>Create new offer</h1>
+    <form id="offer-create"
+          method="POST"
+          th:action="@{/offer/store}"
+          th:object="${offer}"
+          class="row g-3"
+    >
+        <!--    Name    -->
+        <div class="col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    th:field="*{title}"
+            >
+        </div>
+
+        <!--    Start Date    -->
+        <div class="col-md-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input
+                    type="date"
+                    class="form-control"
+                    id="startDate"
+                    name="startDate"
+                    th:field="*{startDate}"
+            >
+        </div>
+
+        <!--    End Date    -->
+        <div class="col-md-6">
+            <label for="endDate" class="form-label">End Date</label>
+            <input
+                    type="date"
+                    class="form-control"
+                    id="endDate"
+                    name="endDate"
+                    th:field="*{endDate}"
+            >
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

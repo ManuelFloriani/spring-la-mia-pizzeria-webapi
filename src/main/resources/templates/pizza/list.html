@@ -21,12 +21,12 @@
         </div>
     </form>
     <div class="row">
-        <div class="col-6">
-            <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="card m-3">
-                <img th:src="*{imageUrl}" alt="pizza image">
-                <h3 th:text="*{name}"></h3>
-                <p th:text="*{description}"></p>
-                <strong th:text="*{priceInCents}"></strong>
+        <div class="col-4">
+            <div th:each="pizza : ${pizzaList}" th:object="${pizza}" class="card m-3 d-flex justify-content-center">
+                <img class="card-img-top" th:src="*{imageUrl}" alt="pizza image">
+                <h3 class
+                    ="card-title" th:text="*{name}"></h3>
+                <strong class="card-text" th:text="*{priceInCents}"></strong>
                 <h2>
                     <a th:href="@{/pizzas/show/{id}(id=*{id})}" title="details"><i class="fa-solid fa-pizza-slice"></i></a>
                     <a th:href="@{/pizzas/edit/{id}(id=*{id})}" title="edit"><i class="fa-solid fa-pencil"></i></a>
