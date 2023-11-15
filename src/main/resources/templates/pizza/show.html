@@ -13,5 +13,32 @@
             <a th:href="@{/pizzas}" class="btn btn-primary">Back to menu</a>
         </p>
     </div>
+
+    <h2>OFFERS</h2>
+    <div class="row">
+        <div class="col-12">
+            <a th:href="@{/offer/create}" class="btn btn-primary">Create new offer</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="offer : ${offers}">
+                    <td th:text="*{offer.title}"></td>
+                    <td th:text="*{offer.startDate}"></td>
+                    <td th:text="*{offer.endDate}"></td>
+                    <td>
+                        <a th:href="@{/offer/edit/{id}(id=${offer.id})}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/offer/delete/{id}(id=${offer.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+        </table>
+    </div>
 </div>
 </body>

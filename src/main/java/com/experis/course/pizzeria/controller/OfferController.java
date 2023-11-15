@@ -1,5 +1,7 @@
 package com.experis.course.pizzeria.controller;
 
+import com.experis.course.pizzeria.exceptions.PizzaNotFoundException;
+import com.experis.course.pizzeria.service.OfferService;
 import com.experis.course.pizzeria.model.Offer;
 import com.experis.course.pizzeria.model.Pizza;
 import com.experis.course.pizzeria.repository.OfferRepository;
@@ -19,14 +21,15 @@ import java.time.LocalDate;
 @RequestMapping("/offers")
 public class OfferController {
 
+    OfferService offerService;
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    @GetMapping("/create")
+    @GetMapping("/offer/create")
     public String create(@RequestParam Integer pizzaId, Model model) {
         try{
             model.addAttribute("offer", offerService.createNewOffer(pizzaId));
-            return "offer/create";
+            return "/offers/create";
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + pizzaId + " not found");
         }
@@ -35,10 +38,10 @@ public class OfferController {
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "offer/create";
+            return "offers/create";
         }
         Offer savedOffer = offerService.saveOffer(formOffer);
-        return "redirect:/offers/show/" + formOffer.getPizza().getId();
+        return "redirect:/offers/create" + formOffer.getPizza().getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -58,6 +61,7 @@ public class OfferController {
         if(bindingResult.hasErrors()){
             return "offer/edit";
         }
+
         Offer savedOffer = offerService.saveOffer(formOffer);
         return "redirect:/offers/show/" + formOffer.getPizza().getId();
     }
