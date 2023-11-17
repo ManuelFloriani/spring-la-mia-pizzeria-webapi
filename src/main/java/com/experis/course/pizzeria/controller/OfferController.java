@@ -21,27 +21,32 @@ import java.time.LocalDate;
 @RequestMapping("/offers")
 public class OfferController {
 
+    @Autowired
     OfferService offerService;
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    @GetMapping("/offer/create")
+    @GetMapping("/create")
     public String create(@RequestParam Integer pizzaId, Model model) {
-        try{
-            model.addAttribute("offer", offerService.createNewOffer(pizzaId));
-            return "/offers/create";
-        } catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + pizzaId + " not found");
+        try {
+            Pizza pizza = pizzaRepository.findById(pizzaId)
+                    .orElseThrow(() -> new PizzaNotFoundException("Pizza with id " + pizzaId + " not found"));
+
+            model.addAttribute("pizza", pizza);
+            model.addAttribute("offer", offerService.createNewOffer(pizza));
+            return "pizza/offers/create";
+        } catch (PizzaNotFoundException e) {
+            throw new ResponseStatusException( HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "offers/create";
+            return "pizza/offers/create";
         }
         Offer savedOffer = offerService.saveOffer(formOffer);
-        return "redirect:/offers/create" + formOffer.getPizza().getId();
+        return "redirect:/pizza/offers/show/" + formOffer.getPizza().getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -49,9 +54,9 @@ public class OfferController {
         try{
             Offer offer = offerService.getOffer(id);
             model.addAttribute("offer", offer);
-            return "offer/edit";
-        } catch(Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "offer with id " + id + " not found");
+            return "pizza/offer/edit";
+        } catch(PizzaNotFoundException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 
         }
     }

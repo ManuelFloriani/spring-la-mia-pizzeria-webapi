@@ -18,8 +18,7 @@ public class OfferService {
     @Autowired
     OfferRepository offerRepository;
 
-    public Offer createNewOffer(Integer pizzaId) throws PizzaNotFoundException {
-        Pizza pizza = pizzaRepository.findById(pizzaId).orElseThrow(() -> new PizzaNotFoundException("Pizza with id " + pizzaId + " not found"));
+    public Offer createNewOffer(Pizza pizza) throws PizzaNotFoundException {
         Offer offer = new Offer();
         offer.setPizza(pizza);
         offer.setStartDate(LocalDate.now());
