@@ -29,15 +29,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="offer : ${offers}">
-                    <td th:text="*{offer.title}"></td>
-                    <td th:text="*{offer.startDate}"></td>
-                    <td th:text="*{offer.endDate}"></td>
+                <tr th:each="offer : *{offers}" th:object="${offer}">
+                    <td th:text="*{title}"></td>
+                    <td th:text="*{startDate}"></td>
+                    <td th:text="*{endDate}"></td>
                     <td>
-                        <a th:href="@{/offer/edit/{id}(id=${offer.id})}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/offer/edit/{id}(id=${id})}" class="btn btn-primary">Edit</a>
                         <a th:href="@{/offer/delete/{id}(id=${offer.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
+            </tbody>
         </table>
     </div>
 </div>

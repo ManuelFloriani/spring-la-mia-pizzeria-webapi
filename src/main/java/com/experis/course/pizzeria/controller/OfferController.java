@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class OfferController {
 
     @Autowired
-    OfferService offerService;
+    private OfferService offerService;
     @Autowired
     private PizzaRepository pizzaRepository;
 
@@ -46,7 +46,7 @@ public class OfferController {
             return "pizza/offers/create";
         }
         Offer savedOffer = offerService.saveOffer(formOffer);
-        return "redirect:/pizza/offers/show/" + formOffer.getPizza().getId();
+        return "redirect:/pizzas/show/" + formOffer.getPizza().getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -54,7 +54,7 @@ public class OfferController {
         try{
             Offer offer = offerService.getOffer(id);
             model.addAttribute("offer", offer);
-            return "pizza/offer/edit";
+            return "pizza/offers/edit";
         } catch(PizzaNotFoundException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 
@@ -64,10 +64,10 @@ public class OfferController {
     @PostMapping("/edit/{id}")
     public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "offer/edit";
+            return "pizzas/offer/edit";
         }
 
         Offer savedOffer = offerService.saveOffer(formOffer);
-        return "redirect:/offers/show/" + formOffer.getPizza().getId();
+        return "redirect:/pizzas/show/" + formOffer.getPizza().getId();
     }
 }
