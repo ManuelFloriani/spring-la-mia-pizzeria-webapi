@@ -34,4 +34,9 @@ public class OfferService {
         return offerRepository.findById(id).orElseThrow( () -> new PizzaNotFoundException("Offer with id " + id + " not found"));
     }
 
+    public Offer deleteOffer(Integer id) throws PizzaNotFoundException{
+        Offer offer = getOffer(id);
+        offerRepository.delete(offer);
+        return offer;
+    }
 }

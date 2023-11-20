@@ -1,5 +1,6 @@
 package com.experis.course.pizzeria.controller;
 
+import com.experis.course.pizzeria.exceptions.OfferNotFoundException;
 import com.experis.course.pizzeria.exceptions.PizzaNotFoundException;
 import com.experis.course.pizzeria.service.OfferService;
 import com.experis.course.pizzeria.model.Offer;
@@ -14,11 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/offers")
+@RequestMapping("/offer")
 public class OfferController {
 
     @Autowired
@@ -55,10 +57,9 @@ public class OfferController {
             Offer offer = offerService.getOffer(id);
             model.addAttribute("offer", offer);
             return "pizza/offers/edit";
-        } catch(PizzaNotFoundException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-
-        }
+        } catch (OfferNotFoundException e) {
+       throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+    }
     }
 
     @PostMapping("/edit/{id}")
@@ -69,5 +70,14 @@ public class OfferController {
 
         Offer savedOffer = offerService.saveOffer(formOffer);
         return "redirect:/pizzas/show/" + formOffer.getPizza().getId();
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        Offer offerToDelete = offerService.getOffer(id);
+        offerService.deleteOffer(offerToDelete.getId());
+        redirectAttributes.addFlashAttribute("message", "Offer deleted successfully");
+        return "redirect:/pizzas/show/" + offerToDelete.getPizza().getId();
+
     }
 }

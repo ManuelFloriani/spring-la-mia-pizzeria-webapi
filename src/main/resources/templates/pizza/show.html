@@ -17,7 +17,7 @@
     <h2>OFFERS</h2>
     <div class="row">
         <div class="col-12">
-            <a th:href="@{/offers/create(pizzaId=${pizza.id})}" class="btn btn-primary">Create new offer</a>
+            <a th:href="@{/offer/create(pizzaId=${pizza.id})}" class="btn btn-primary">Create new offer</a>
         </div>
         <table>
             <thead>
@@ -34,8 +34,8 @@
                     <td th:text="*{startDate}"></td>
                     <td th:text="*{endDate}"></td>
                     <td>
-                        <a th:href="@{/offer/edit/{id}(id=${id})}" class="btn btn-primary">Edit</a>
-                        <a th:href="@{/offer/delete/{id}(id=${offer.id})}" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/offer/edit/{id}(id=*{id})}" class="btn btn-primary">Edit</a>
+                        <form th:action="@{/offer/delete/{id}(id=*{id})}" method="POST"><button type="submit" class="btn btn-danger">Delete</button></form>
                     </td>
                 </tr>
             </tbody>
