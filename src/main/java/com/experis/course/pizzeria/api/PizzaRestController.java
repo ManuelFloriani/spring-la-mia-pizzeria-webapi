@@ -20,6 +20,7 @@ public class PizzaRestController {
 
     @Autowired
     private PizzaService pizzaService;
+
     // Lista di pizze
     @GetMapping
     public List<Pizza> index(@RequestParam Optional<String> search) {
@@ -51,7 +52,7 @@ public class PizzaRestController {
 
     // modifica di una pizza
     @PutMapping("/{id}")
-    public Pizza update(@PathVariable Integer id, @Valid @RequestBody Pizza pizza){
+    public Pizza update(@PathVariable Integer id, @Valid @RequestBody Pizza pizza) {
         pizza.setId(id);
         try {
             return pizzaService.editPizza(pizza);
@@ -59,5 +60,16 @@ public class PizzaRestController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    // eliminazione di una pizza
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        try {
+            Pizza pizzaToDelete = pizzaService.getPizzaById(id);
+            pizzaService.deletePizza(id);
+        } catch (PizzaNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }
