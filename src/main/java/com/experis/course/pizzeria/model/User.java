@@ -23,9 +23,19 @@ public class User {
     @NotBlank
     private String lastName;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @NotBlank
     @Email
     private String email;
+
+    private String password;
 
 
     public String getFirstName() {
