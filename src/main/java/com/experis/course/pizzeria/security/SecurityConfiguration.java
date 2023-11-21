@@ -2,6 +2,7 @@ package com.experis.course.pizzeria.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -39,14 +40,27 @@ public class SecurityConfiguration {
     // SecurityFilterChain
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         // Con questo metodo configuro le regole di sicurezza per rendere tutte le pagine private,
         // ovvero vincolo alla login l'accesso a TUTTE le pagine del sito
-        http
+
+        /* http
             .authorizeHttpRequests()
             .anyRequest()
             .authenticated()
             .and().formLogin()
             .and().logout();
+        return http.build(); */
+        http.authorizeHttpRequests()
+                .requestMatchers("/pizzas", "/pizzas/show/**").hasAnyAuthority("ADMIN", "USER")              // Index/Show   PIZZA
+                .requestMatchers("/offer", "/users").hasAuthority("ADMIN")                             // Index        INGREDIENTI/OFFERTE/UTENTI
+                .requestMatchers("/pizzas/create", "/offer/create/**").hasAuthority("ADMIN")        // Create       PIZZA/OFFERTE/INGREDIENTI
+                .requestMatchers("/pizzas/edit/**", "/offer/edit/**").hasAuthority("ADMIN")                            // Edit         PIZZA/OFFERTE
+                .requestMatchers("/pizzas/delete/**").hasAuthority("ADMIN")                   // Delete       PIZZA/INGREDIENTI
+                .requestMatchers(HttpMethod.POST, "/pizzas/**", "/offer/**").hasAuthority("ADMIN")  // Metodi POST  PIZZA/INGREDIENTI/OFFERTE
+                .requestMatchers("/**").permitAll()
+                .and().formLogin()
+                .and().logout();
         return http.build();
     }
 }
