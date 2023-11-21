@@ -1,5 +1,6 @@
 package com.experis.course.pizzeria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -33,6 +34,7 @@ public class Pizza {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "pizza")
+    @JsonIgnore
     private List<Offer> offers = new ArrayList<>();
 
     public List<Offer> getOffers() {

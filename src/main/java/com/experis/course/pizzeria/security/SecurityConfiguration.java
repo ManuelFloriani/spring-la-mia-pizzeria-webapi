@@ -61,6 +61,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout();
+        // Disabilito il CSRF per poter utilizzare Postman
+        http.csrf().disable();
         return http.build();
     }
 }
