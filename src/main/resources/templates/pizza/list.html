@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:insert="fragments/resources :: headResources('Pizzeria Vesuvio')"></head>
 <body>
 <nav th:replace="fragments/navbar :: topNavbar('pizza')"></nav>
@@ -17,7 +17,7 @@
 
         </div>
         <div class="col-3">
-            <a th:href="@{/pizzas/create}" class="btn btn-primary">Add new pizza</a>
+            <a th:href="@{/pizzas/create}" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Add new pizza</a>
         </div>
     </form>
     <div class="row">
@@ -29,9 +29,9 @@
                 <strong class="card-text" th:text="*{priceInCents}"></strong>
                 <h2>
                     <a th:href="@{/pizzas/show/{id}(id=*{id})}" title="details"><i class="fa-solid fa-pizza-slice"></i></a>
-                    <a th:href="@{/pizzas/edit/{id}(id=*{id})}" title="edit"><i class="fa-solid fa-pencil"></i></a>
+                    <a th:href="@{/pizzas/edit/{id}(id=*{id})}" sec:authorize="hasAuthority('ADMIN')" title="edit"><i class="fa-solid fa-pencil"></i></a>
                 </h2>
-                <form th:action="@{/pizzas/delete/{id}(id=*{id})}" method="POST">
+                <form th:action="@{/pizzas/delete/{id}(id=*{id})}" sec:authorize="hasAuthority('ADMIN')" method="POST">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>

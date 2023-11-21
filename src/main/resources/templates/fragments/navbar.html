@@ -13,6 +13,10 @@
                         <a class="nav-link" th:classAppend="${area == 'pizza' ? 'active' : ''}"
                         th:href="@{/pizzas}">Pizzas</a>
                 </li>
+                <!--       Add logout link         -->
+                <li class="nav-item">
+                    <strong><a class="nav-link" th:href="@{/logout}">Logout</a></strong>
+                </li>
             </ul>
         </div>
     </div>
